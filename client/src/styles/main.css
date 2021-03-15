@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+}
+
+.toggler {
+  position: relative;
+  z-index: 2;
+  width: var(--toggler-width);
+  height: var(--toggler-height);
+  background-color: var(--toggler-bg-color);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 350ms;
+}
+
+.toggler--active {
+  background-color: var(--toggler-active-bg-color);
+}
