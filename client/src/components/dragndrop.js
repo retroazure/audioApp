@@ -1,10 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { useDropzone } from "react-dropzone";
+import AppContext from "../context/appContext";
 
 //Drag and Drop component
 
 export const DragnDrop = () => {
-  const onDrop = useCallback((acceptedFiles) => {}, []);
+  const { displayState, setDisplayState } = useContext(AppContext);
+
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      if (acceptedFiles) {
+        setDisplayState({
+          acceptedFiles,
+        });
+        console.log(acceptedFiles);
+      } else {
+        return displayState;
+      }
+    },
+    [setDisplayState, displayState]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

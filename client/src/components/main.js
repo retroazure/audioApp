@@ -7,21 +7,15 @@ import { DragnDrop } from "./dragndrop";
 //Parent component for drag and drop and Audio Player components
 
 const Main = ({ text }) => {
-  const { displayState, setDisplayState } = useContext(AppContext);
-
-  const toggle = () => {
-    setDisplayState({
-      display: displayState ? false : true,
-    });
-  };
-
+  const { displayState } = useContext(AppContext);
+  console.log(displayState);
   return (
     <div className="container">
       <h1>AudioApp</h1>
       <p>{text}</p>
 
-      <button onClick={toggle}>Press Here</button>
       <DragnDrop />
+      {displayState ? <AudioPlayer /> : ""}
     </div>
   );
 };
