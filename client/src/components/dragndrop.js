@@ -9,16 +9,30 @@ export const DragnDrop = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      if (acceptedFiles) {
-        setDisplayState({
-          acceptedFiles,
-        });
-        console.log(acceptedFiles);
-      } else {
-        return displayState;
-      }
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader();
+
+        reader.onabort = () => console.log("file reading was aborted");
+        reader.onerror = () => console.log("file reading has failed");
+        reader.onload = () => {
+          console.log(file.name);
+          setDisplayState(
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          );
+
+          // Do whatever you want with the file contents
+          const binaryStr = reader.result;
+          console.log(binaryStr);
+        };
+        reader.readAsArrayBuffer(file);
+        //reader.readAsDataURL(file);
+        //reader.readAsBinaryString(file);
+        //reader.readAsText(file);
+      });
     },
-    [setDisplayState, displayState]
+    [setDisplayState]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
