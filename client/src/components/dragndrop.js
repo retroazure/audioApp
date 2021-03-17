@@ -19,10 +19,10 @@ export const DragnDrop = () => {
           setDisplayState(
             Object.assign(file, {
               preview: URL.createObjectURL(file),
-            })
+            }) //It gives us the url of the blob allowing us to use it as the src of the song playing when using the audio player
           );
+          URL.revokeObjectURL(displayState);
 
-          // Do whatever you want with the file contents
           const binaryStr = reader.result;
           console.log(binaryStr);
         };
